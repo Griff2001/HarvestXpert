@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Harvesthub</title>
+
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,700' rel='stylesheet'
+        type='text/css'>
+   <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Recursive:wght@500&display=swap" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Damion' rel='stylesheet' type='text/css'>
+  <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/font-awesome.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/templatemo-style.css') }}" rel="stylesheet">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}" type="image/x-icon" />
+  <script type="text/JavaScript" src="{{ url_for('static', filename='js/cities.js') }}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+  <style>
+    html body {
+      background-color: #e4e4e4;
+  }
+
+    /* CSS styles for code section */
+pre {
+  position: relative; /* Required for copying overlay */
+}
+
+code {
+  user-select: all; /* Allow copying of code */
+}
+
+/* Copying overlay styles */
+.copy-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* Show copying overlay on hover */
+pre:hover .copy-overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+  </style>
+
+
+    <!-- Include Prism.js library -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.25.0/themes/prism.css" />
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.25.0/prism.js"></script>
+
+</head>
+
+<body>
+  <!-- Preloader -->
+  <div id="loader-wrapper">
+    <div id="loader"></div>
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+  </div>
+  <!-- End Preloader -->
+  <div class="tm-top-header">
+    <div class="container">
+      <div class="row">
+        <div class="tm-top-header-inner">
+          <div class="tm-logo-container">
+
+            <h1 class="tm-site-name tm-handwriting-font"><a style="text-decoration: None" href="/">Harvesthub</a></h1>
+          </div>
+          <div class="mobile-menu-icon">
+            <i class="fa fa-bars"></i>
+          </div>
+          <nav class="tm-nav">
+            <ul>
+              {% block nav %}
+              {% endblock %}
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="relative w-full px-4 py-3 mb-4 rounded-md text-white font-medium {{ messages[0][0] == 'error' and 'bg-red-600' or messages[0][0] == 'success' and 'bg-green-600' or messages[0][0] == 'info' and 'bg-blue-600' or 'bg-gray-600' }}">
+
+            <button type="button" class="absolute top-0 right-0 px-3 py-1 text-sm font-medium focus:outline-none" onclick="this.parentElement.remove()">
+                <svg class="w-4 h-4 fill-current text-white" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 8.586L6.707 5.293a1 1 0 1 0-1.414 1.414L8.586 10l-3.293 3.293a1 1 0 1 0 1.414 1.414L10 11.414l3.293 3.293a1 1 0 1 0 1.414-1.414L11.414 10l3.293-3.293a1 1 0 0 0-1.414-1.414L10 8.586z"/>
+                </svg>
+            </button>
+            {% for category, message in messages %}
+                <div>{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
+
+  {% block body %} {% endblock %}
+  <!-- JS -->
+  <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-1.11.2.min.js') }}"></script> <!-- jQuery -->
+  <script type="text/javascript" src="{{ url_for('static', filename='js/templatemo-script.js') }}"></script> <!-- Templatemo Script -->
+
+</body>
+{% include "footer.html" %}
+
+</html>

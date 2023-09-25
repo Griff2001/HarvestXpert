@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Header Section -->
+<header class="bg-blue-500 text-white text-center py-8">
+    <h1 class="text-3xl font-semibold">About Us</h1>
+</header>
+
+<!-- Main Content Section -->
+<main class="max-w-6xl mx-auto mt-8 p-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Person 1 -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <img src="/static/img/pic1.jpg" alt="Griffin Wigina" class="w-full h-70 object-cover rounded-md mb-4">
+            <h2 class="text-xl font-semibold">Griffin Wigina</h2>
+            <p class="text-gray-600">Innovator</p>
+            <p class="text-gray-600">wiginagriff@gmail.com</p>
+            <p class="mt-4"> passionate about IoT and cybersecurity, driven by a desire to safeguard connected systems from threats with a strong curiosity and commitment to continuous learnin.</p>
+        </div>
+
+        <!-- Person 2 -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <img src="/static/img/pic2.png" alt="Ann Muli" class="w-full h-63 object-cover rounded-md mb-4">
+            <h2 class="text-xl font-semibold">Ann Muli</h2>
+            <p class="text-gray-600">Innovator</p>
+            <p class="text-gray-600">annmuli
+                
+                @gmail.com</p>
+            <p class="mt-4">fervently dedicated to the intersection of IoT and computer science, eager to innovate and harness the power of connected devices for solving complex problems..</p>
+        </div>
+    </div>
+</main>
+{% endblock %}

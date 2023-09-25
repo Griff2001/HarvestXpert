@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> - Smart Fertilizer System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
+ <link rel="apple-touch-icon" sizes="180x180" href="/static/logo/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/static/logo/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/static/logo/favicon-16x16.png">
+<link rel="manifest" href="/static/logo/site.webmanifest">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+
+  </head>
+<style>
+      body {
+        font-family: 'Poppins', serif;
+
+      }
+    </style>
+     <header class="bg-gradient-to-br from-green-500 to-blue-500 text-white px-4 py-8  mb-0">
+  <div class="container mx-auto flex items-center justify-between">
+    <div class="flex items-center">
+      <img class="w-12 h-12 mr-4" src="/static/logo/veggie-fertilizer.jpg" alt="GrowFertile logo" />
+      <h1 class="text-3xl font-bold">Harvesthub</h1>
+    </div>
+    <nav>
+      <ul class="flex items-center">
+        <li class="mx-2">
+          <a href="/" class="text-lg font-medium hover:text-gray-300">Home</a>
+        </li>
+        <li class="mx-2">
+          <a href="{{ url_for("about") }}" class="text-lg font-medium hover:text-gray-300">About</a>
+        </li>
+        <li class="mx-2">
+          <a href="#" class="text-lg font-medium hover:text-gray-300">Contact</a>
+        </li>
+           <li class="mx-2">
+          <a href="{{ url_for("signup") }}" class="text-lg font-medium hover:text-gray-300">Sign Up</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+</header>
+  <body style="background-image: url('/static/IMG-20230503-WA0061.jpg');background-size: cover;
+    background-position: center;">
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="relative w-full px-4 py-3 mb-4 rounded-md text-white font-medium {{ messages[0][0] == 'error' and 'bg-red-600' or messages[0][0] == 'success' and 'bg-green-600' or messages[0][0] == 'info' and 'bg-blue-600' or 'bg-gray-600' }}">
+
+            <button type="button" class="absolute top-0 right-0 px-3 py-1 text-sm font-medium focus:outline-none" onclick="this.parentElement.remove()">
+                <svg class="w-4 h-4 fill-current text-white" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 8.586L6.707 5.293a1 1 0 1 0-1.414 1.414L8.586 10l-3.293 3.293a1 1 0 1 0 1.414 1.414L10 11.414l3.293 3.293a1 1 0 1 0 1.414-1.414L11.414 10l3.293-3.293a1 1 0 0 0-1.414-1.414L10 8.586z"/>
+                </svg>
+            </button>
+            {% for category, message in messages %}
+                <div>{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
+
+  {% block content %}
+
+  {% endblock %}
+  </body >
+<footer class="bg-gray-200 text-gray-700 p-4">
+      <p class="text-sm">
+        &copy; 2023 Harvesthub. All rights reserved.
+      </p>
+    </footer>
+
+</html>

@@ -1,0 +1,151 @@
+{% extends "layout.html" %}
+
+{% block nav %}
+<li><a href="/index.html">Home</a></li>
+
+<li><a href="/FertilizerRecommendation" >Fertilizer</a></li>
+<li><a href="/devices" class="active" >My Devices</a></li>
+     <li><a href="{{ url_for("logout") }}" >Logout</a></li>
+
+{% endblock %}
+{% block body %}
+<body class="bg-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-3xl font-bold mt-8">Historic Data</h1>
+        <p class="mt-4">Device Code: {{ device_code }}</p>
+        <p class="mt-4">Number of items per page:
+            <select id="itemsPerPage" class="mt-2 rounded-md border-gray-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none">
+{#                <option value="2" {% if items_per_page == 2 %}selected{% endif %}>2</option>#}
+                <option value="10" {% if items_per_page == 10 %}selected{% endif %}>10</option>
+                <option value="25" {% if items_per_page == 25 %}selected{% endif %}>25</option>
+                <option value="50" {% if items_per_page == 50 %}selected{% endif %}>50</option>
+            </select>
+        </p>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+        <div class="overflow-x-auto">
+            <table class="table-auto w-full">
+                <thead>
+                    <tr class="bg-gray-200">
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nitrogen</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Potassium</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Phosphorus</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date/Time (EAT)</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+
+
+                    {% for data in data_list %}
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap">{{ data.id }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">{{ data.nitrogen }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">{{ data.potassium }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">{{ data.phosphorus }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">{{ data.datetime|datetimeformat }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="flex justify-end mt-4">
+            <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                {% if has_prev %}
+                <a href="{{ url_for('historic_data', device_id=device_id, page=1, items_per_page=items_per_page) }}" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">First</a>
+<a href="{{ url_for('historic_data', device_id=device_id, page=prev_page, items_per_page=items_per_page) }}" class="relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">Previous</a>
+{% endif %}
+<span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700">{{ page }}</span>
+{% if has_next %}
+<a href="{{ url_for('historic_data', device_id=device_id, page=next_page, items_per_page=items_per_page) }}" class="relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">Next</a>
+<a href="{{ url_for('historic_data', device_id=device_id, page=total_pages, items_per_page=items_per_page) }}" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">Last</a>
+{% endif %}
+</nav>
+</div>
+</div>
+
+     <!-- C3.js library -->
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/c3@0.7.20/c3.min.js"></script>
+
+<!-- CSS styles for C3.js -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/c3@0.7.20/c3.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+ <div class="container mx-auto my-4">
+
+      <h1 class="text-2xl text-primary font-bold mb-4">Level of Potassium, Phosphorus and Nitrogen over Time</h1>
+      <div id="chart"></div>
+    </div>
+  <script>
+      $.ajax({
+    url: "{{ url_for("chart", device_id=device_id) }}",
+    method: "GET",
+    success: function(response) {
+        // Parse the response data as JSON
+
+        var data = response;
+
+
+        // Process the data to extract the labels and values
+        var labels = Object.keys(data.nitrogen);
+        // Parse data into an array of objects
+
+        var values = Object.values(data.nitrogen);
+        {#var labelsP = Object.keys(data.phosphorus);#}
+        // Parse data into an array of objects
+
+        var valuesP = Object.values(data.phosphorus);
+        {#var labelsK = Object.keys(data.potassium);#}
+        // Parse data into an array of objects
+
+        var valuesK = Object.values(data.potassium);
+        {#document.getElementById("data2").innerText=values#}
+
+
+        // Create the chart using C3.js
+        var chart = c3.generate({
+    bindto: "#chart",
+    data: {
+        x: "x",
+        xFormat: "%Y-%m-%d %H:%M:%S",
+        columns: [
+            ["x"].concat(labels),
+            ["Potassium"].concat(valuesK),
+            ["Nitrogen"].concat(values),
+            ["Phosphorus"].concat(valuesP)
+        ],
+        type: "line"
+    },
+    axis: {
+        x: {
+            type: "timeseries",
+            tick: {
+                format: "%Y-%m-%d %H:%M:%S"
+            }
+        }
+    }
+});
+
+    },
+    error: function(error) {
+        console.error(error);
+    }
+});
+
+
+
+
+  </script>
+
+
+<script>
+    // JavaScript code to update the URL when the items per page dropdown is changed
+    document.getElementById('itemsPerPage').addEventListener('change', function() {
+        var itemsPerPage = document.getElementById("itemsPerPage").value
+        window.location.href = `{{ url_for('historic_data',device_id=device_id, page=page) }} &items_per_page=${itemsPerPage}`;
+    });
+</script>
+
+</body>
+{% endblock %}

@@ -1,0 +1,100 @@
+{% extends "layout.html" %}
+
+{% block nav %}
+<li><a href="/index.html">Home</a></li>
+
+<li><a href="FertilizerRecommendation" >Fertilizer</a></li>
+    <li><a href="devices" class="active" >My Devices</a></li>
+     <li><a href="{{ url_for("logout") }}" >Logout</a></li>
+
+{% endblock %}
+{% block body %}
+<body class="bg-gray-100">
+
+<h2 style="text-align: center;" class="text-2xl font-bold text-blue-400">
+  <b>Get informed advice on fertilizer based on your soil NPK values</b>
+</h2>
+<br >
+
+    <div class="flex justify-center items-center py-4">
+    <div class="bg-gray-100 p-6 rounded-md shadow-md mb-8 max-w-l ">
+  <h1 class="text-2xl font-bold mb-4">Add a New Device</h1>
+  <form action="{{ url_for('create_device') }}" method="post">
+
+            <input
+              class="shadow appearance-none border rounded w-120 h-19 my-4 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="name"
+              type="text"
+              placeholder="Enter Device Name"
+              name="name"
+            />
+
+    <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md mb-4">
+      Create Device
+    </button>
+  </form>
+  {% if device_id %}
+    <div class="bg-gray-200 p-4 rounded-md">
+    <div class="text-blue-400 hidden" id="notification"></div>
+      <h2 class="text-lg font-bold mb-2">Device ID:</h2>
+      <pre class="language-python"><code>#define DEVICE_ID "{{ device_id }}"
+      //Copy this code to your device sketch. </code></pre>
+        <p class="mb-8">
+            [Click to copy]
+        </p>
+    <p class="text-green-600"><strong>Alternatively, add this device ID to your device interface: {{ device_id }}</strong></p>
+    </div>
+  {% endif %}
+</div>
+    </div>
+<!-- JavaScript code for copying code with notification -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var codeElements = document.getElementsByTagName('code');
+  for (var i = 0; i < codeElements.length; i++) {
+    codeElements[i].addEventListener('click', function() {
+      var range = document.createRange();
+      range.selectNode(this);
+      window.getSelection().addRange(range);
+      document.execCommand('copy');
+      window.getSelection().removeAllRanges();
+      showNotification('Code copied!');
+    });
+  }
+
+  function showNotification(message) {
+    var notification = document.createElement('div');
+    notification.className = 'notification';
+    notification.textContent = message;
+    const notification_div=document.getElementById("notification")
+        notification_div.appendChild(notification);
+    notification_div.classList.remove("hidden")
+    setTimeout(function() {
+      notification_div.removeChild(notification);
+    }, 2000);
+  }
+});
+</script>
+    <div class="container mx-auto mt-10">
+        <h1 class="text-3xl font-bold mb-5">Devices</h1>
+        <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {% for device in devices %}
+                <li class="bg-white p-5 shadow-md">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="font-bold">{{ device.name }}</span>
+{#                        <span class="text-gray-500">Device ID: {{ device.device_code }}</span>#}
+                    </div>
+                    <div class="text-gray-700">
+                        <p>Device ID: {{ device.device_code }}</p>
+                    </div>
+                    <div class="mt-4">
+                        <a href="{{ url_for('predictions', device_id=device.id) }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full">View Results</a>
+                     <a href="{{ url_for('historic_data', device_id=device.id) }}" class="bg-pink-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-full">View Raw Data</a>
+
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+{% endblock %}
