@@ -1,9 +1,4 @@
-/**
-   BasicHTTPSClient.ino
 
-    Created on: 20.08.2018
-
-*/
 
 #include <Arduino.h>
 
@@ -20,8 +15,8 @@
 ESP8266WiFiMulti WiFiMulti;
 
 // Fingerprint for demo URL, expires on June 2, 2021, needs to be updated well before this date
-const char* fingerprint = "9D DA E8 6B F7 0E C4 8C 13 F7 EF FC 73 54 D0 05 6A 00 59 F2";
-#define DEVICE_ID "d5962190-a421-401d-8a3e-58e376a80289"
+const char* fingerprint = "C5 0E AC 4E B6 D2 9E C6 D4 11 6A 3F C0 F4 DD 46 96 56 CA 3C";
+#define DEVICE_ID "53d1d1e4-9e97-45a4-823d-17e5248166a9"
       //Copy this code to your device sketch.
 //#define DEVICE_ID  "5f71e954-3ecf-43cd-9261-0cb1dd00e49c"
       //Copy this code to your device sketch. 
