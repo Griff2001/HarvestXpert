@@ -64,3 +64,15 @@ fertilizer_dict = {
 
         'KNo': """<b style = "color:#c79c60;">The K value of your soil is up to the mark.</b><hr style = "height:2px; background-color:#c79c60;"s>"""
 }
+
+sms_fertilizer_dict = {
+    'NHigh': "1. Soil's N is high, risk of weeds.\n* 2. Add manure\n* Use coffee grinds\n* 3. Plant nitrogen-fixing plants",
+    'Nlow': "1. Soil's N is low.\n* 2. Add sawdust\n* 3. Plant nitrogen-feeding plants\n* 4. Use high-N fertilizers",
+    'NNo': " 1. N level in soil is optimal.",
+    'PHigh': "1. Soil's P is high.\n* 2. Limit manure\n* 3. Use P-free fertilizer\n* 4. Consider crop rotations",
+    'Plow': " 1. Soil's P is low.\n* 2. Use bone meal\n* 3. Apply rock phosphate\n* 4. Use high-P fertilizers\n* 5. Adjust soil pH",
+    'PNo': " 1. P level in soil is optimal.",
+    'KHigh': "1. Soil's K is high.\n* 2. Loosen soil\n* 3. Avoid K-rich fertilizers\n* 4. Use compost",
+    'Klow': "1. Soil's K is low.\n* 2. Use potash\n* 3. Apply kelp meal\n* 4. Bury banana peels\n* 5. Use potash fertilizers",
+    'KNo': "1. K level in soil is optimal."
+}

@@ -5,10 +5,19 @@ from flask_migrate import Migrate
 import pandas as pd
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, logout_user, current_user, LoginManager, login_manager, UserMixin
-from utils.fertilizer import fertilizer_dict
+from utils.fertilizer import fertilizer_dict, sms_fertilizer_dict
 from flask_sqlalchemy import SQLAlchemy
 import uuid
 from datetime import datetime, timedelta
+from twilio.rest import Client  # Import the Twilio Client
+
+# # Your Twilio credentials
+# ACCOUNT_SID = 'AC862a2593d8664871712cda9b07333412'
+# AUTH_TOKEN = 'b210f5faf3871055ab773a94460dabae'
+# TWILIO_PHONE_NUMBER = '+12293608033'
+
+# Setup Twilio client
+# twilio_client = Client(ACCOUNT_SID, AUTH_TOKEN)
 
 app = Flask(__name__)
 app.secret_key = 'GrowFertile'  # for session encryption
@@ -21,11 +30,13 @@ login_manager.login_view = 'index'
 login_manager.init_app(app)
 
 
+
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(50), unique=True, nullable=False)
     password = db.Column(db.String(50), nullable=False)
     name = db.Column(db.String(50), nullable=False)
+    phone = db.Column(db.String(20), nullable=True)  # Add phone number field
 
 
 class Predictions(db.Model):
@@ -51,6 +62,7 @@ class Data(db.Model):
     user_id = db.Column(db.Integer)
     device_id = db.Column(db.Integer)
     datetime = db.Column(db.DateTime, default=datetime.utcnow)
+
 
 
 @app.route('/chart')
@@ -284,19 +296,21 @@ def predictions():
 @app.route("/FertilizerRecommendation.html", methods=["POST", "GET"])
 @app.route("/FertilizerRecommendation", methods=["POST", "GET"])
 def fertilizer_recommend():
-    crop_name = request.args.get('cropname')
-    N_filled = request.args.get('nitrogen', type=int)
-    P_filled = request.args.get('phosphorous', type=int)
-    K_filled = request.args.get('potassium', type=int)
-    print(crop_name, P_filled, K_filled, N_filled)
-    if not crop_name or not N_filled or not P_filled or not K_filled:
-        if request.method != "POST":
-            return render_template("FertilizerRecommendation.html")
+    print("fertilizer_recommend function accessed!")
+
     if request.method == "POST":
         crop_name = str(request.form['cropname'])
         N_filled = int(request.form['nitrogen'])
         P_filled = int(request.form['phosphorous'])
         K_filled = int(request.form['potassium'])
+    else:
+        crop_name = request.args.get('cropname')
+        N_filled = request.args.get('nitrogen', type=int)
+        P_filled = request.args.get('phosphorous', type=int)
+        K_filled = request.args.get('potassium', type=int)
+
+    if not crop_name or not N_filled or not P_filled or not K_filled:
+        return render_template("FertilizerRecommendation.html")
 
     df = pd.read_csv('Data/Crop_NPK.csv')
 
@@ -304,41 +318,56 @@ def fertilizer_recommend():
     P_desired = df[df['Crop'] == crop_name]['P'].iloc[0]
     K_desired = df[df['Crop'] == crop_name]['K'].iloc[0]
 
-    n = N_desired - N_filled
-    p = P_desired - P_filled
-    k = K_desired - K_filled
+    diff_n = N_desired - N_filled
+    diff_p = P_desired - P_filled
+    diff_k = K_desired - K_filled
 
-    if n < 0:
-        key1 = "NHigh"
-    elif n > 0:
-        key1 = "Nlow"
-    else:
-        key1 = "NNo"
+    recommendation1 = Markup(str(fertilizer_dict["NHigh" if diff_n < 0 else "Nlow" if diff_n > 0 else "NNo"]))
+    recommendation2 = Markup(str(fertilizer_dict["PHigh" if diff_p < 0 else "Plow" if diff_p > 0 else "PNo"]))
+    recommendation3 = Markup(str(fertilizer_dict["KHigh" if diff_k < 0 else "Klow" if diff_k > 0 else "KNo"]))
 
-    if p < 0:
-        key2 = "PHigh"
-    elif p > 0:
-        key2 = "Plow"
-    else:
-        key2 = "PNo"
+    # This will fetch the appropriate recommendation based on the differences.
+    sms_recommendation1 = Markup(str(sms_fertilizer_dict["NHigh" if diff_n < 0 else "Nlow" if diff_n > 0 else "NNo"]))
+    sms_recommendation2 = Markup(str(sms_fertilizer_dict["PHigh" if diff_p < 0 else "Plow" if diff_p > 0 else "PNo"]))
+    sms_recommendation3 = Markup(str(sms_fertilizer_dict["KHigh" if diff_k < 0 else "Klow" if diff_k > 0 else "KNo"]))
 
-    if k < 0:
-        key3 = "KHigh"
-    elif k > 0:
-        key3 = "Klow"
-    else:
-        key3 = "KNo"
 
-    abs_n = abs(n)
-    abs_p = abs(p)
-    abs_k = abs(k)
+    # Generate the message based on the template data
+    message_text = f"""
+    **Difference between desired value of N and your farm's N value is {diff_n}
+    {sms_recommendation1}
+    **Difference between desired value of P and your farm's P value is {diff_p}
+    {sms_recommendation2}
+    **Difference between desired value of K and your farm's K value is {diff_k}
+    {sms_recommendation3}
+    """
 
-    response1 = Markup(str(fertilizer_dict[key1]))
-    response2 = Markup(str(fertilizer_dict[key2]))
-    response3 = Markup(str(fertilizer_dict[key3]))
-    return render_template('Fertilizer-Result.html', recommendation1=response1,
-                           recommendation2=response2, recommendation3=response3,
-                           diff_n=abs_n, diff_p=abs_p, diff_k=abs_k)
+    # Send the message using Twilio
+    print(f"Sending SMS to +254704860552 with message: {message_text}")
+    account_sid = 'AC862a2593d8664871712cda9b07333412'  # replace with your actual SID
+    auth_token = 'b210f5faf3871055ab773a94460dabae'    # replace with your actual Auth Token
+    client = Client(account_sid, auth_token)
+    from_phone_number = '+12293608033'
+
+    try:
+        response = client.messages.create(
+            body=message_text,
+            from_=from_phone_number,
+            to='+254704860552'
+        )
+        print(f"Twilio Response: {response.sid} - {response.status}")
+    except Exception as e:
+        print(f"Error sending SMS: {e}")
+
+    # Render the template as usual
+    return render_template('Fertilizer-Result.html', 
+                            diff_n=diff_n, recommendation1=recommendation1,
+                            diff_p=diff_p, recommendation2=recommendation2,
+                            diff_k=diff_k, recommendation3=recommendation3)
+
+
+
+
 
 
 if __name__ == '__main__':
