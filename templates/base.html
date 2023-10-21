@@ -18,19 +18,19 @@
 
         }
     </style>
-     <header class="bg-gradient-to-br from-green-500 to-blue-500 text-white px-4 py-8  mb-0">
+     <header class="bg-gray-800 text-white px-4 py-8  mb-0">
     <div class="container mx-auto flex items-center justify-between">
-      <div class="flex items-center">
-        <img class="w-12 h-12 mr-4" src="/static/logo/veggie-fertilizer.jpg" alt="GrowFertile logo" />
-        <h1 class="text-3xl font-bold">HarvestX</h1>
+      <div class="flex flex-row items-center">
+        <img class="w-12 h-12 mr-4 rounded-sm" src="/static/logo/veggie-fertilizer.jpg" alt="GrowFertile logo" />
+        <h1 class="text-3xl font-bold font-Popins">HarvestX</h1>
       </div>
-      <nav>
+      <nav >
         <ul class="flex items-center">
           <li class="mx-2">
             <a href="/" class="text-lg font-medium hover:text-gray-300">Home</a>
           </li>
           <li class="mx-2">
-            <a href="{{ url_for("about") }}" class="text-lg font-medium hover:text-gray-300">About</a>
+            <a href="{{ url_for("about") }}" class="text-lg font-medium hover:text-gray-300">About Us</a>
           </li>
           <li class="mx-2">
             <a href="#" class="text-lg font-medium hover:text-gray-300">Contact</a>
@@ -43,13 +43,12 @@
   </div>
 
 </header>
-  <body style="background-image: url('/static/img/cover2.jpg');background-size: cover;
+  <body style="background-image: url('/static/img/Hero.jpg');background-size: cover backg;;
     background-position: center;">
 
   {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
         <div class="relative w-full px-4 py-3 mb-4 rounded-md text-white font-medium {{ messages[0][0] == 'error' and 'bg-red-600' or messages[0][0] == 'success' and 'bg-green-600' or messages[0][0] == 'info' and 'bg-blue-600' or 'bg-gray-600' }}">
-
             <button type="button" class="absolute top-0 right-0 px-3 py-1 text-sm font-medium focus:outline-none" onclick="this.parentElement.remove()">
                 <svg class="w-4 h-4 fill-current text-white" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path d="M10 8.586L6.707 5.293a1 1 0 1 0-1.414 1.414L8.586 10l-3.293 3.293a1 1 0 1 0 1.414 1.414L10 11.414l3.293 3.293a1 1 0 1 0 1.414-1.414L11.414 10l3.293-3.293a1 1 0 0 0-1.414-1.414L10 8.586z"/>
