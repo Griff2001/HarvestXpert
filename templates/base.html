@@ -5,45 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title> - Smart Fertilizer System</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
- <link rel="apple-touch-icon" sizes="180x180" href="/static/logo/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/static/logo/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/static/logo/favicon-16x16.png">
-<link rel="manifest" href="/static/logo/site.webmanifest">
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/logo/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/logo/favicon-16x16.png">
+    <link rel="manifest" href="/static/logo/site.webmanifest">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
 
   </head>
-<style>
-      body {
-        font-family: 'Poppins', serif;
+    <style>
+        body {
+          font-family: 'Poppins', serif;
 
-      }
+        }
     </style>
      <header class="bg-gradient-to-br from-green-500 to-blue-500 text-white px-4 py-8  mb-0">
-  <div class="container mx-auto flex items-center justify-between">
-    <div class="flex items-center">
-      <img class="w-12 h-12 mr-4" src="/static/logo/veggie-fertilizer.jpg" alt="GrowFertile logo" />
-      <h1 class="text-3xl font-bold">Harvesthub</h1>
-    </div>
-    <nav>
-      <ul class="flex items-center">
-        <li class="mx-2">
-          <a href="/" class="text-lg font-medium hover:text-gray-300">Home</a>
-        </li>
-        <li class="mx-2">
-          <a href="{{ url_for("about") }}" class="text-lg font-medium hover:text-gray-300">About</a>
-        </li>
-        <li class="mx-2">
-          <a href="#" class="text-lg font-medium hover:text-gray-300">Contact</a>
-        </li>
-           <li class="mx-2">
-          <a href="{{ url_for("signup") }}" class="text-lg font-medium hover:text-gray-300">Sign Up</a>
-        </li>
-      </ul>
-    </nav>
+    <div class="container mx-auto flex items-center justify-between">
+      <div class="flex items-center">
+        <img class="w-12 h-12 mr-4" src="/static/logo/veggie-fertilizer.jpg" alt="GrowFertile logo" />
+        <h1 class="text-3xl font-bold">HarvestX</h1>
+      </div>
+      <nav>
+        <ul class="flex items-center">
+          <li class="mx-2">
+            <a href="/" class="text-lg font-medium hover:text-gray-300">Home</a>
+          </li>
+          <li class="mx-2">
+            <a href="{{ url_for("about") }}" class="text-lg font-medium hover:text-gray-300">About</a>
+          </li>
+          <li class="mx-2">
+            <a href="#" class="text-lg font-medium hover:text-gray-300">Contact</a>
+          </li>
+            <li class="mx-2">
+            <a href="{{ url_for("signup") }}" class="text-lg font-medium hover:text-gray-300">Sign Up</a>
+          </li>
+        </ul>
+      </nav>
   </div>
 
 </header>
-  <body style="background-image: url('/static/IMG-20230503-WA0061.jpg');background-size: cover;
+  <body style="background-image: url('/static/img/cover2.jpg');background-size: cover;
     background-position: center;">
 
   {% with messages = get_flashed_messages(with_categories=true) %}
@@ -68,7 +68,7 @@
   </body >
 <footer class="bg-gray-200 text-gray-700 p-4">
       <p class="text-sm">
-        &copy; 2023 Harvesthub. All rights reserved.
+        &copy; 2023 HarvestX. All rights reserved.
       </p>
     </footer>
 
