@@ -1,119 +1,129 @@
 {% extends "base.html" %}
 {% block content %}
-  <div class="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+<div class="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
-      <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-        Sign up for an account
-      </h2>
+        <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+            Sign up for an account
+        </h2>
     </div>
 
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-      <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-        <form class="space-y-6" action="{{ url_for("signup") }}" method="POST">
-          <div>
-            <label for="name" class="block text-sm font-medium text-gray-700">
-              Name
-            </label>
-            <div class="mt-1">
-              <input id="name" name="name" type="text" autocomplete="name" required
-                     class="appearance-none block w-full px-3 py-2 border border-gray-300
-                            rounded-md shadow-sm placeholder-gray-400 focus:outline-none
-                            focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+        <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+            <form class="space-y-6" action="{{ url_for("signup") }}" method="POST">
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700">
+                        Name
+                    </label>
+                    <div class="mt-1">
+                        <input id="name" name="name" type="text" autocomplete="name" required
+                            class="appearance-none block w-full px-3 py-2 border border-gray-300
+                                    rounded-md shadow-sm placeholder-gray-400 focus:outline-none
+                                    focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">
+                        Email address
+                    </label>
+                    <div class="mt-1">
+                        <input id="email" name="email" type="email" autocomplete="email" required
+                            class="appearance-none block w-full px-3 py-2 border border-gray-300
+                                    rounded-md shadow-sm placeholder-gray-400 focus:outline-none
+                                    focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="phone" class="block text-sm font-medium text-gray-700">
+                        Phone Number
+                    </label>
+                    <div class="mt-1">
+                        <input id="phone" name="phone" type="tel" required
+                            class="appearance-none block w-full px-3 py-2 border border-gray-300
+                                    rounded-md shadow-sm placeholder-gray-400 focus:outline-none
+                                    focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700">
+                        Password
+                    </label>
+                    <div class="mt-1">
+                        <input id="password" name="password" type="password" autocomplete="current-password"
+                            required class="appearance-none block w-full px-3 py-2 border border-gray-300
+                                            rounded-md shadow-sm placeholder-gray-400 focus:outline-none
+                                            focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="password_confirmation" class="block text-sm font-medium text-gray-700">
+                        Confirm password
+                    </label>
+                    <div class="mt-1">
+                        <input id="password_confirmation" name="password_confirmation" type="password"
+                            autocomplete="current-password" required
+                            class="appearance-none block w-full px-3 py-2 border border-gray-300
+                                        rounded-md shadow-sm placeholder-gray-400 focus:outline-none
+                                        focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                    </div>
+                </div>
+
+                <div>
+                    <button type="submit"
+                        class="group relative w-full flex justify-center py-2 px-4 border border-transparent
+                                    text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-blue-400
+                                    focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                            <!-- Heroicon name: solid/lock-closed -->
+
+                            <svg class="h-5 w-5 text-blue-400 group-hover:text-blue-300"
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M10 2a2.828 2.828 0 00-2 1.031A2.828 2.828 0 006.031 6 2.828 2.828 0 008 7.969V9a1 1 0 002 0V7.969c0-.545.214-1.055.594-1.437A2.828 2.828 0 0013.969 2 2.828 2.828 0 0012 3.969V6a1 1 0 11-2 0V3.969A2.828 2.828 0 0010 2zm4.188 11.813c-1.172 1.172-3.072 1.172-4.242 0L10 12.243l-.945.945c-1.172 1.172-3.072 1.172-4.242 0s-1.172-3.072 0-4.242L6.757 7l-.945-.945c-1.172-1.172-1.172-3.072 0-4.242s3.072-1.172 4.242 0L10 5.757l.945-.945c1.172-1.172 3.072-1.172 4.242 0s1.172 3.072 0 4.242L13.243 7l.945.945c1.172 1.172 1.172 3.072 0 4.242z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </span>
+                        Sign up
+                    </button>
+                </div>
+            </form>
+
+            <div class="mt-6">
+                <div class="relative">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-gray-300"></div>
+                    </div>
+                    <div class="relative flex justify-center text-sm">
+                        <span class="px-2 bg-white text-gray-500">
+                            Already have an account?
+                        </span>
+                    </div>
+                </div>
+
+                <div class="mt-6">
+                    <a href="/login"
+                        class="group relative w-full flex justify-center py-2 px-4 border border-transparent
+                                        text-sm font-medium rounded-md text-white bg-gray-600 hover:bg-gray-500
+                                        focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                        <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                            <!-- Heroicon name: solid/lock-closed -->
+                            <svg class="h-5 w-5 text-gray-400 group-hover:text-gray-300"
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M10 2a2.828 2.828 0 00-2 1.031A2.828 2.828 0 006.031 6 2.828 2.828 0 008 7.969V9a1 1 0 002 0V7.969c0-.545.214-1.055.594-1.437A2.828 2.828 0 0013.969 2 2.828 2.828 0 0012 3.969V6a1 1 0 11-2 0V3.969A2.828 2.828 0 0010 2zm4.188 11.813c-1.172 1.172-3.072 1.172-4.242 0L10 12.243l-.945.945c-1.172 1.172-3.072 1.172-4.242 0s-1.172-3.072 0-4.242L6.757 7l-.945-.945c-1.172-1.172-1.172-3.072 0-4.242s3.072-1.172 4.242 0L10 5.757l.945-.945c1.172-1.172 3.072-1.172 4.242 0s1.172 3.072 0 4.242L13.243 7l.945.945c1.172 1.172 1.172 3.072 0 4.242z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </span>
+                        Sign in
+                    </a>
+                </div>
             </div>
-          </div>
-
-          <div>
-            <label for="email" class="block text-sm font-medium text-gray-700">
-              Email address
-            </label>
-            <div class="mt-1">
-              <input id="email" name="email" type="email" autocomplete="email" required
-                     class="appearance-none block w-full px-3 py-2 border border-gray-300
-                            rounded-md shadow-sm placeholder-gray-400 focus:outline-none
-                            focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-            </div>
-          </div>
-
-          <div>
-            <label for="password" class="block text-sm font-medium text-gray-700">
-              Password
-            </label>
-            <div class="mt-1">
-              <input id="password" name="password" type="password" autocomplete="current-password"
-                     required class="appearance-none block w-full px-3 py-2 border border-gray-300
-                                     rounded-md shadow-sm placeholder-gray-400 focus:outline-none
-                                     focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-            </div>
-          </div>
-
-          <div>
-            <label for="password_confirmation" class="block text-sm font-medium text-gray-700">
-              Confirm password
-            </label>
-            <div class="mt-1">
-              <input id="password_confirmation" name="password_confirmation" type="password"
-                     autocomplete="current-password" required
-                     class="appearance-none block w-full px-3 py-2 border border-gray-300
-                            rounded-md shadow-sm placeholder-gray-400 focus:outline-none
-                            focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-            </div>
-          </div>
-
-          <div>
-            <button type="submit"
-                    class="group relative w-full flex justify-center py-2 px-4 border border-transparent
-                           text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-blue-400
-                           focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-              <span class="absolute left-0 inset-y-0 flex items-center pl-3">
-                <!-- Heroicon name: solid/lock-closed -->
-
-            <svg class="h-5 w-5 text-blue-400 group-hover:text-blue-300"
-                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
-                 aria-hidden="true">
-              <path fill-rule="evenodd"
-                    d="M10 2a2.828 2.828 0 00-2 1.031A2.828 2.828 0 006.031 6 2.828 2.828 0 008 7.969V9a1 1 0 002 0V7.969c0-.545.214-1.055.594-1.437A2.828 2.828 0 0013.969 2 2.828 2.828 0 0012 3.969V6a1 1 0 11-2 0V3.969A2.828 2.828 0 0010 2zm4.188 11.813c-1.172 1.172-3.072 1.172-4.242 0L10 12.243l-.945.945c-1.172 1.172-3.072 1.172-4.242 0s-1.172-3.072 0-4.242L6.757 7l-.945-.945c-1.172-1.172-1.172-3.072 0-4.242s3.072-1.172 4.242 0L10 5.757l.945-.945c1.172-1.172 3.072-1.172 4.242 0s1.172 3.072 0 4.242L13.243 7l.945.945c1.172 1.172 1.172 3.072 0 4.242z"
-                    clip-rule="evenodd" />
-            </svg>
-          </span>
-          Sign up
-        </button>
-      </div>
-    </form>
-
-    <div class="mt-6">
-      <div class="relative">
-        <div class="absolute inset-0 flex items-center">
-          <div class="w-full border-t border-gray-300"></div>
         </div>
-        <div class="relative flex justify-center text-sm">
-          <span class="px-2 bg-white text-gray-500">
-            Already have an account?
-          </span>
-        </div>
-      </div>
-
-      <div class="mt-6">
-        <a href="/login"
-           class="group relative w-full flex justify-center py-2 px-4 border border-transparent
-                  text-sm font-medium rounded-md text-white bg-gray-600 hover:bg-gray-500
-                  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-          <span class="absolute left-0 inset-y-0 flex items-center pl-3">
-            <!-- Heroicon name: solid/lock-closed -->
-            <svg class="h-5 w-5 text-gray-400 group-hover:text-gray-300"
-                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
-                 aria-hidden="true">
-              <path fill-rule="evenodd"
-                    d="M10 2a2.828 2.828 0 00-2 1.031A2.828 2.828 0 006..031 6 2.828 2.828 0 008 7.969V9a1 1 0 002 0V7.969c0-.545.214-1.055.594-1.437A2.828 2.828 0 0013.969 2 2.828 2.828 0 0012 3.969V6a1 1 0 11-2 0V3.969A2.828 2.828 0 0010 2zm4.188 11.813c-1.172 1.172-3.072 1.172-4.242 0L10 12.243l-.945.945c-1.172 1.172-3.072 1.172-4.242 0s-1.172-3.072 0-4.242L6.757 7l-.945-.945c-1.172-1.172-1.172-3.072 0-4.242s3.072-1.172 4.242 0L10 5.757l.945-.945c1.172-1.172 3.072-1.172 4.242 0s1.172 3.072 0 4.242L13.243 7l.945.945c1.172 1.172 1.172 3.072 0 4.242z"
-clip-rule="evenodd" />
-</svg>
-</span>
-Sign in
-</a>
-</div>
-</div>
-</div>
-</div>
-
-  </div>
+    </div>
 </div>
 {% endblock %}
