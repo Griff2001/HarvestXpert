@@ -5,11 +5,11 @@ from flask_migrate import Migrate
 import pandas as pd
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, logout_user, current_user, LoginManager, login_manager, UserMixin
-from utils.fertilizer import fertilizer_dict, sms_fertilizer_dict
+from utils.fertilizer import fertilizer_dict
 from flask_sqlalchemy import SQLAlchemy
 import uuid
 from datetime import datetime, timedelta
-from twilio.rest import Client  # Import the Twilio Client
+#from twilio.rest import Client  # Import the Twilio Client
 
 # # Your Twilio credentials
 # ACCOUNT_SID = 'AC862a2593d8664871712cda9b07333412'
