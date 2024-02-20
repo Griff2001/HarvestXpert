@@ -1,5 +1,5 @@
 import pytz
-from flask import Flask, render_template, request, Markup, flash, redirect, url_for, session, jsonify
+from flask import Flask, render_template, request, flash, redirect, url_for, session, jsonify
 import numpy as np
 from flask_migrate import Migrate
 import pandas as pd
@@ -36,7 +36,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(50), unique=True, nullable=False)
     password = db.Column(db.String(50), nullable=False)
     name = db.Column(db.String(50), nullable=False)
-    phone = db.Column(db.String(20), nullable=True)  # Add phone number field
+   # phone = db.Column(db.String(20), nullable=True)  # Add phone number field
 
 
 class Predictions(db.Model):
@@ -322,53 +322,89 @@ def fertilizer_recommend():
     diff_p = P_desired - P_filled
     diff_k = K_desired - K_filled
 
-    recommendation1 = Markup(str(fertilizer_dict["NHigh" if diff_n < 0 else "Nlow" if diff_n > 0 else "NNo"]))
-    recommendation2 = Markup(str(fertilizer_dict["PHigh" if diff_p < 0 else "Plow" if diff_p > 0 else "PNo"]))
-    recommendation3 = Markup(str(fertilizer_dict["KHigh" if diff_k < 0 else "Klow" if diff_k > 0 else "KNo"]))
+
+    n = N_desired - N_filled
+    p = P_desired - P_filled
+    k = K_desired - K_filled
+
+    if n < 0:
+        key1 = "NHigh"
+    elif n > 0:
+        key1 = "Nlow"
+    else:
+        key1 = "NNo"
+
+    if p < 0:
+        key2 = "PHigh"
+    elif p > 0:
+        key2 = "Plow"
+    else:
+        key2 = "PNo"
+
+    if k < 0:
+        key3 = "KHigh"
+    elif k > 0:
+        key3 = "Klow"
+    else:
+        key3 = "KNo"
+
+    abs_n = abs(n)
+    abs_p = abs(p)
+    abs_k = abs(k)
+
+    response1 = Markup(str(fertilizer_dict[key1]))
+    response2 = Markup(str(fertilizer_dict[key2]))
+    response3 = Markup(str(fertilizer_dict[key3]))
+    return render_template('Fertilizer-Result.html', recommendation1=response1,
+                           recommendation2=response2, recommendation3=response3,
+                           diff_n=abs_n, diff_p=abs_p, diff_k=abs_k)
+
+
+
+
+
+    #recommendation1 = Markup(str(fertilizer_dict["NHigh" if diff_n < 0 else "Nlow" if diff_n > 0 else "NNo"]))
+    #recommendation2 = Markup(str(fertilizer_dict["PHigh" if diff_p < 0 else "Plow" if diff_p > 0 else "PNo"]))
+   # recommendation3 = Markup(str(fertilizer_dict["KHigh" if diff_k < 0 else "Klow" if diff_k > 0 else "KNo"]))
 
     # This will fetch the appropriate recommendation based on the differences.
-    sms_recommendation1 = Markup(str(sms_fertilizer_dict["NHigh" if diff_n < 0 else "Nlow" if diff_n > 0 else "NNo"]))
-    sms_recommendation2 = Markup(str(sms_fertilizer_dict["PHigh" if diff_p < 0 else "Plow" if diff_p > 0 else "PNo"]))
-    sms_recommendation3 = Markup(str(sms_fertilizer_dict["KHigh" if diff_k < 0 else "Klow" if diff_k > 0 else "KNo"]))
+    #sms_recommendation1 = Markup(str(sms_fertilizer_dict["NHigh" if diff_n < 0 else "Nlow" if diff_n > 0 else "NNo"]))
+   # sms_recommendation2 = Markup(str(sms_fertilizer_dict["PHigh" if diff_p < 0 else "Plow" if diff_p > 0 else "PNo"]))
+    #sms_recommendation3 = Markup(str(sms_fertilizer_dict["KHigh" if diff_k < 0 else "Klow" if diff_k > 0 else "KNo"]))
 
 
     # Generate the message based on the template data
-    message_text = f"""
-    **Difference between desired value of N and your farm's N value is {diff_n}
-    {sms_recommendation1}
-    **Difference between desired value of P and your farm's P value is {diff_p}
-    {sms_recommendation2}
-    **Difference between desired value of K and your farm's K value is {diff_k}
-    {sms_recommendation3}
-    """
+   # message_text = f"""
+    #**Difference between desired value of N and your farm's N value is {diff_n}
+   # {sms_recommendation1}
+   # **Difference between desired value of P and your farm's P value is {diff_p}  remove the two asteric before difference
+   # {sms_recommendation2}
+   # **Difference between desired value of K and your farm's K value is {diff_k}
+   # {sms_recommendation3}
+   # """
 
     # Send the message using Twilio
-    print(f"Sending SMS to +254704860552 with message: {message_text}")
-    account_sid = 'AC862a2593d8664871712cda9b07333412'  # replace with your actual SID
-    auth_token = 'b210f5faf3871055ab773a94460dabae'    # replace with your actual Auth Token
-    client = Client(account_sid, auth_token)
-    from_phone_number = '+12293608033'
+    #print(f"Sending SMS to +254704860552 with message: {message_text}")
+    #account_sid = 'AC862a2593d8664871712cda9b07333412'  # replace with your actual SID
+    #auth_token = 'b210f5faf3871055ab773a94460dabae'    # replace with your actual Auth Token
+    #client = Client(account_sid, auth_token)
+    #from_phone_number = '+12293608033'
 
-    try:
-        response = client.messages.create(
-            body=message_text,
-            from_=from_phone_number,
-            to='+254704860552'
-        )
-        print(f"Twilio Response: {response.sid} - {response.status}")
-    except Exception as e:
-        print(f"Error sending SMS: {e}")
+    #try:
+       # response = client.messages.create(
+          #  body=message_text,
+           # from_=from_phone_number,
+           # to='+254740390420'
+       # )
+        #print(f"Twilio Response: {response.sid} - {response.status}")
+    #except Exception as e:
+        #print(f"Error sending SMS: {e}")
 
     # Render the template as usual
-    return render_template('Fertilizer-Result.html', 
-                            diff_n=diff_n, recommendation1=recommendation1,
-                            diff_p=diff_p, recommendation2=recommendation2,
-                            diff_k=diff_k, recommendation3=recommendation3)
-
-
-
-
-
+#return render_template('Fertilizer-Result.html', 
+                           #diff_n=diff_n, recommendation1=recommendation1,
+                           #diff_p=diff_p, recommendation2=recommendation2,
+                           # diff_k=diff_k, recommendation3=recommendation3)
 
 if __name__ == '__main__':
     app.run()
