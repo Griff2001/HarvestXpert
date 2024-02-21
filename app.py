@@ -1,6 +1,7 @@
 import pytz
 from flask import Flask, render_template, request, flash, redirect, url_for, session, jsonify
 import numpy as np
+from markupsafe import Markup
 from flask_migrate import Migrate
 import pandas as pd
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -120,6 +121,10 @@ def logout():
 def about():
     return render_template('about.html')
 
+
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
 
 
 @app.route('/historic_data/<int:device_id>', methods=['GET'])
