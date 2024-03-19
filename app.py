@@ -297,6 +297,12 @@ def predictions():
     #                        potassium_avg=potassium_avg, phosphorus_avg=phosphorus_avg)
 
 
+
+@app.route('/PesticideRecommendation')
+def PesticideRecommendation():
+    return render_template('PesticideRecommendation.html')
+
+
 @app.route("/recommend-fertilizer", methods=["POST", "GET"])
 @app.route("/FertilizerRecommendation.html", methods=["POST", "GET"])
 @app.route("/FertilizerRecommendation", methods=["POST", "GET"])

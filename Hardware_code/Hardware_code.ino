@@ -14,7 +14,7 @@
 
 ESP8266WiFiMulti WiFiMulti;
 
-// Fingerprint for demo URL, expires on June 2, 2021, needs to be updated well before this date
+// Fingerprint for demo URL, expires on June 2, 2024, needs to be updated well before this date
 const char* fingerprint = "C5 0E AC 4E B6 D2 9E C6 D4 11 6A 3F C0 F4 DD 46 96 56 CA 3C";
 #define DEVICE_ID "53d1d1e4-9e97-45a4-823d-17e5248166a9"
       //Copy this code to your device sketch.
@@ -119,9 +119,9 @@ void send_readings(int N, int P, int K) {
 void loop() {
 
   //Serial.println("Starting the reading process");
-  int N=random(15, 25);
-  int P=random(65, 85);
-  int K=random(75, 85);
+  int N=random(0.1, 5);
+  int P=random(0.05, 0.5);
+  int K=random(0.1, 5);
   if (WiFi.status()==WL_CONNECTED){
     send_readings(N, P, K);
     digitalWrite(wifiStatusLed, HIGH);
