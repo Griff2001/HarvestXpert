@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container mx-auto py-8">
+        <h1 class="text-3xl font-semibold text-center mb-6">
+            <span style="color: white;">Farm Items for Buyers</span>
+        </h1>
+
+        <!-- Search Bar -->
+        <div class="flex justify-center mb-6">
+            <input type="text" class="w-2/3 p-2 rounded-lg shadow-md" placeholder="Search for farm items..." />
+            <form action="{{ url_for('search_items') }}" method="GET" class="flex items-center">
+                <input type="text" name="query" placeholder="Search items" class="border rounded p-2">
+                <button type="submit" class="ml-2 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg">Search</button>
+            </form>
+        </div>
+
+        <!-- Item Categories -->
+        <div class="flex justify-center space-x-4 mb-6">
+            <a href="/vegetables" class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-lg">Vegetables</a>
+            <a href="/grains" class="bg-yellow-500 hover:bg-yellow-600 text-white font-medium py-2 px-4 rounded-lg">Grains</a>
+            <a href="/groceries" class="bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg">Groceries</a>
+        </div>
+
+        <!-- Filters (Frequently Viewed and Recently Added) -->
+        <div class="flex justify-center space-x-4 mb-6">
+            <a href="/frequently_viewed" class="text-blue-500 hover:underline">Frequently Viewed</a>
+            <a href="/recently_added" class="text-blue-500 hover:underline">Recently Added</a>
+        </div>
+
+        <!-- Display Farm Items (Sample Item Cards) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Sample Item Card (Repeat as needed) -->
+            <div class="bg-white rounded-lg shadow-md p-4">
+                <h2 class="text-lg font-semibold text-blue-600 mb-2">Cabbage</h2>
+                <img src="/static/cover2.jpg" alt="Cabbage" class="w-full h-40 object-cover rounded-lg mb-4">
+                <p class="text-gray-700 mb-4">Fresh and ready to eat</p>
+                <p class="text-gray-500">Price: $10.00</p>
+                <a href="{{url_for('buyers_section')}}"  class="mt-4 inline-block bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg">Add to Cart</a>
+            <!-- look for a work around, on additing the items to the cart section, create database-->
+            </div>
+           
+
+            <!-- Sample Item Card (Repeat as needed) -->
+            <div class="bg-white rounded-lg shadow-md p-4">
+                <h2 class="text-lg font-semibold text-blue-600 mb-2">Farm Item 2</h2>
+                <img src="/static/cover2.jpg" alt="Cabbage" class="w-full h-40 object-cover rounded-lg mb-4">
+                <p class="text-gray-700 mb-4">Description of the farm item. Lorem ipsum dolor sit amet.</p>
+                <p class="text-gray-500">Price: $12.00</p>
+                <a href="#" class="mt-4 inline-block bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg">Add to Cart</a>
+            </div>
+            <div class="bg-white rounded-lg shadow-md p-4">
+                <h2 class="text-lg font-semibold text-blue-600 mb-2">Farm Item 2</h2>
+                <img src="/static/cover2.jpg" alt="Cabbage" class="w-full h-40 object-cover rounded-lg mb-4">
+                <p class="text-gray-700 mb-4">Description of the farm item. Lorem ipsum dolor sit amet.</p>
+                <p class="text-gray-500">Price: $12.00</p>
+                <a href="#" class="mt-4 inline-block bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg">Add to Cart</a>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-4">
+                <h2 class="text-lg font-semibold text-blue-600 mb-2">Farm Item 2</h2>
+                <img src="/static/cover2.jpg" alt="Cabbage" class="w-full h-40 object-cover rounded-lg mb-4">
+                <p class="text-gray-700 mb-4">Description of the farm item. Lorem ipsum dolor sit amet.</p>
+                <p class="text-gray-500">Price: $12.00</p>
+                <a href="#" class="mt-4 inline-block bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg">Add to Cart</a>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-4">
+                <h2 class="text-lg font-semibold text-blue-600 mb-2">Farm Item 2</h2>
+                <img src="/static/cover2.jpg" alt="Cabbage" class="w-full h-40 object-cover rounded-lg mb-4">
+                <p class="text-gray-700 mb-4">Description of the farm item. Lorem ipsum dolor sit amet.</p>
+                <p class="text-gray-500">Price: $12.00</p>
+                <a href="#" class="mt-4 inline-block bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg">Add to Cart</a>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-4">
+                <h2 class="text-lg font-semibold text-blue-600 mb-2">Farm Item 2</h2>
+                <img src="/static/cover2.jpg" alt="Cabbage" class="w-full h-40 object-cover rounded-lg mb-4">
+                <p class="text-gray-700 mb-4">Description of the farm item. Lorem ipsum dolor sit amet.</p>
+                <p class="text-gray-500">Price: $12.00</p>
+                <a href="#" class="mt-4 inline-block bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg">Add to Cart</a>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-md p-4">
+                <h2 class="text-lg font-semibold text-blue-600 mb-2">Farm Item 2</h2>
+                <img src="/static/cover2.jpg" alt="Cabbage" class="w-full h-40 object-cover rounded-lg mb-4">
+                <p class="text-gray-700 mb-4">Description of the farm item. Lorem ipsum dolor sit amet.</p>
+                <p class="text-gray-500">Price: $12.00</p>
+                <a href="#" class="mt-4 inline-block bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg">Add to Cart</a>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-4">
+                <h2 class="text-lg font-semibold text-blue-600 mb-2">Farm Item 2</h2>
+                <img src="/static/cover2.jpg" alt="Cabbage" class="w-full h-40 object-cover rounded-lg mb-4">
+                <p class="text-gray-700 mb-4">Description of the farm item. Lorem ipsum dolor sit amet.</p>
+                <p class="text-gray-500">Price: $12.00</p>
+                <a href="#" class="mt-4 inline-block bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg">Add to Cart</a>
+            </div>
+
+            <!-- Sample Item Card (Repeat as needed) -->
+            <div class="bg-white rounded-lg shadow-md p-4">
+                <h2 class="text-lg font-semibold text-blue-600 mb-2">Farm Item 3</h2>
+                <img src="/static/cover2.jpg" alt="Cabbage" class="w-full h-40 object-cover rounded-lg mb-4">
+                <p class="text-gray-700 mb-4">Description of the farm item. Lorem ipsum dolor sit amet.</p>
+                <p class="text-gray-500">Price: $8.00</p>
+                <a href="#" class="mt-4 inline-block bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg">Add to Cart</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

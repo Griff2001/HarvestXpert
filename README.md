@@ -1,4 +1,4 @@
-# growfertile.science
+#harvesthub.bogingo.com
 Fertilizers recommendation site
 ## Website Functionality 
 - Recommending fertalizer interventions from NPK values

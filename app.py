@@ -374,6 +374,32 @@ def fertilizer_recommend():
 
 
 
+@app.route('/cartegories')
+def cartegories():
+    return render_template('cartegories.html')
+
+@app.route('/buyers_section')
+def buyers_section():
+    return render_template('buyers_section.html')
+
+@app.route('/frequently_viewed')
+def frequently_viewed():
+    return render_template('frequently_viewed.html')
+
+@app.route('/recently_added')
+def recently_added():
+    return render_template('recently_added.html')
+
+@app.route('/vegetable')
+def vegetable():
+    return render_template('vegetable.html')
+
+@app.route('/sellers_section/')
+def sellers_section():
+    return render_template('sellers_section.html')
+
+
+
     #recommendation1 = Markup(str(fertilizer_dict["NHigh" if diff_n < 0 else "Nlow" if diff_n > 0 else "NNo"]))
     #recommendation2 = Markup(str(fertilizer_dict["PHigh" if diff_p < 0 else "Plow" if diff_p > 0 else "PNo"]))
    # recommendation3 = Markup(str(fertilizer_dict["KHigh" if diff_k < 0 else "Klow" if diff_k > 0 else "KNo"]))

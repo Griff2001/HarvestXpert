@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container mx-auto px-4 py-8  mb-36">
+        <h1 class="text-3xl font-semibold text-center mb-6 text-white">Choose Your Category</h1>
+
+        <!-- Category Selection -->
+        <div class="flex justify-center space-x-4">
+            <!-- Buyer Section -->
+            <div class="bg-white shadow-md rounded-lg p-4">
+                <h2 class="text-xl font-semibold text-blue-600 mb-2">Buyers</h2>
+                <p class="text-gray-700 mb-4">Browse and shop for farm produce.</p>
+                <a href="{{url_for('buyers_section')}}" class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg inline-block">View Buyers Section</a>
+            </div>
+            
+
+            <!-- Seller Section -->
+            <div class="bg-white shadow-md rounded-lg p-4">
+                <h2 class="text-xl font-semibold text-green-600 mb-2">Sellers</h2>
+                <p class="text-gray-700 mb-4">List and sell your farm produce.</p>
+                <a href="{{url_for('sellers_section')}}"class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-lg inline-block">View Sellers Section</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

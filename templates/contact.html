@@ -1,1 +1,33 @@
 {% extends "base.html" %}
+
+{% block content %}
+<div class="container mx-auto py-8">
+    <h2 class="text-3xl font-bold mb-6">Our Services</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <a href="https://tinkacode.com/" target="_blank">
+                <img src="/static/services/sev2.jpeg" alt="Training Programs" class="mb-4 rounded-lg">
+            </a>
+            <h3 class="text-xl font-semibold mb-2">Training Programs</h3>
+            <p class="text-gray-700">We offer comprehensive training programs tailored to students, schools, and other educational institutions. Our courses cover a wide range of topics including scratch, python for kids and beginners and Robotics</p>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <img src="/static/services/irrig.jpg" alt="Smart Irrigation Projects" class="mb-4 rounded-lg">
+            <h3 class="text-xl font-semibold mb-2">Smart Irrigation Projects</h3>
+            <p class="text-gray-700">Our expertise in smart irrigation projects helps conserve water resources while optimizing crop yields. We design and implement advanced irrigation systems to preserve water and improve crop yield</p>
+        </div>
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <img src="/static/services/prototyping.jpg" alt="Prototyping Services" class="mb-4 rounded-lg">
+            <h3 class="text-xl font-semibold mb-2">Prototyping Services</h3>
+            <p class="text-gray-700">From concept to reality, we assist in prototyping various projects. Whether it's for research purposes or commercial development, we provide prototyping solutions to you</p>
+        </div>
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <img src="/static/services/personal.jpg" alt="Personal Projects" class="mb-4 rounded-lg">
+            <h3 class="text-xl font-semibold mb-2">Personal Projects</h3>
+            <p class="text-gray-700">Have a personal project in mind? We're here to help! Our team can provide guidance, resources, and technical support to bring your ideas to life</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
